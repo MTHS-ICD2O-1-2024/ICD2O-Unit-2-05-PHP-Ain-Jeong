@@ -34,19 +34,21 @@
           <?php
           // tax rate
           const TAX_RATE = 0.18;
+
           // input
           $hoursWorked = $_GET["hours-worked"];
           $hourlyWage = $_GET["hourly-wage"];
-          // process
+
+          // calculate pay and taxes
           $pay = ($hoursWorked * $hourlyWage) * (1.00 - TAX_RATE);
-          $taxes = ($hoursWorked * $hourlyWage) * TAX_RATE;
-          // format the pay and taxes
-          $formattedPay = '$' . number_format($pay, 2);
-          $formattedTaxes = '$' . number_format($taxes, 2);
+          $taxes = $hoursWorked * $hourlyWage * TAX_RATE;
+
+          // format as currency
+          $formatAsCurrency = numfmt_create('en_EN', NumberFormatter::CURRENCY);
+
           // output
-          echo "Your pay will be: " . $formattedPay;
-          echo "<br />";
-          echo "The government will take: " . $formattedTaxes;
+          echo "Your pay will be: " . numfmt_format_currency($formatAsCurrency, $pay, "CAD") . "<br />";
+          echo "The government will take: " . numfmt_format_currency($formatAsCurrency, $taxes, "CAD");
           ?>
         </div>
       </div>
