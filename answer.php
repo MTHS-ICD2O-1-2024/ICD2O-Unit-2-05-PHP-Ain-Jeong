@@ -44,8 +44,8 @@
           $taxes = $hoursWorked * $hourlyWage * TAX_RATE;
 
           // output
-          echo "Your pay will be: " . (round($pay, 2)) . "<br />";
-          echo "The government will take: " . (round($taxes, 2));
+          echo "Your pay will be: $" . (round($pay, 2)) . "<br />";
+          echo "The government will take: $" . (round($taxes, 2));
           ?>
         </div>
       </div>
