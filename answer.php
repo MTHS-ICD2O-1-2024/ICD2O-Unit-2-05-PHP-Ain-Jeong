@@ -29,28 +29,29 @@
       <div class="right-image">
         <img src="./images/income_tax.jpg" alt="income tax image" width="300" />
       </div>
-      <br />
-      <div class="page-content">Please enter your employment information</div>
       <div class="page-content-php">
-        <form action="answer.php" method="GET">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type=" text" pattern="-?[0-9]*(\.[0-9]+)?" name="hours-worked">
-            <label class="mdl-textfield__label" for="hours-worked">Hours worked (hours)</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-          <br />
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type=" text" pattern="-?[0-9]*(\.[0-9]+)?" name="hourly-wage">
-            <label class="mdl-textfield__label" for="hourly-wage">Hourly wage ($)</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-          <br />
-          <!-- Accent-colored raised button with ripple -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-            type="submit">
-            Calculate
-          </button>
-        </form>
+        <div id="employment-info">
+          <?php
+          // tax rate
+          const TAX_RATE = 0.18;
+          // input
+          $hoursWorked = $_GET["hours-worked"];
+          $hourlyWage = $_GET["hourly-wage"];
+          // process
+          $pay = ($hoursWorked * $hourlyWage) * (1.00 - TAX_RATE);
+          $taxes = ($hoursWorked * $hourlyWage) * TAX_RATE;
+          // format the pay and taxes
+          $formattedPay = '$' . number_format($pay, 2);
+          $formattedTaxes = '$' . number_format($taxes, 2);
+          // output
+          echo "Your pay will be: " . $formattedPay;
+          echo "<br />";
+          echo "The government will take: " . $formattedTaxes;
+          ?>
+        </div>
+      </div>
+      <div class="page-content-return">
+        <a href="./index.php">Return ...</a>
       </div>
     </main>
   </div>
