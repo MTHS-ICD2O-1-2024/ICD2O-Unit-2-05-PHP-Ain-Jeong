@@ -39,16 +39,13 @@
           $hoursWorked = $_GET["hours-worked"];
           $hourlyWage = $_GET["hourly-wage"];
 
-          // calculate pay and taxes
+          // process
           $pay = ($hoursWorked * $hourlyWage) * (1.00 - TAX_RATE);
           $taxes = $hoursWorked * $hourlyWage * TAX_RATE;
 
-          // format as currency
-          $formatAsCurrency = numfmt_create('en_EN', NumberFormatter::CURRENCY);
-
           // output
-          echo "Your pay will be: " . numfmt_format_currency($formatAsCurrency, $pay, "CAD") . "<br />";
-          echo "The government will take: " . numfmt_format_currency($formatAsCurrency, $taxes, "CAD");
+          echo "Your pay will be: " . (round($pay, 2)) . "<br />";
+          echo "The government will take: " . (round($taxes, 2));
           ?>
         </div>
       </div>
